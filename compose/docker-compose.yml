@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+
+  laravel-app:
+    image: gabrieldpadua21/laravel-app:prod
+    container_name: laravel-app
+    networks:
+      - laranet2
+
+  nginx:
+    image: gabrieldpadua21/laravel-proxy:prod
+    container_name: nginx
+    networks:
+      - laranet2
+    ports:
+      - "8080:80"
+    depends_on:
+      - laravel-app
+
+networks:
+  laranet2:
+    driver: bridge
